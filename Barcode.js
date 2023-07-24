@@ -6,10 +6,8 @@
  */
 
 
-import React, {
-    PropTypes,
-    Component,
-} from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {
     View,
     requireNativeComponent,
@@ -66,6 +64,14 @@ export default class Barcode extends Component {
 
     stopScan() {
         BarcodeManager.stopSession()
+    }
+
+    startFlash() {
+        BarcodeManager.startFlash()
+    }
+
+    stopFlash() {
+        BarcodeManager.stopFlash()
     }
 
     _handleAppStateChange = (currentAppState) => {

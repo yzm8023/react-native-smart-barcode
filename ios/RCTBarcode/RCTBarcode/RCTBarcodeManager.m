@@ -171,6 +171,40 @@ RCT_EXPORT_METHOD(stopSession) {
     });
 }
 
+RCT_EXPORT_METHOD(startFlash) {
+    NSLog(@"startFlash...start");
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch]) {
+            [device lockForConfiguration:nil];
+            [device setTorchMode:AVCaptureTorchModeOn];
+            [device unlockForConfiguration];
+            NSLog(@"startFlash...ok");
+        }else{
+            NSLog(@"startFlash...noTorch");
+        }
+    }
+    NSLog(@"startFlash...end");
+}
+
+RCT_EXPORT_METHOD(stopFlash) {
+    NSLog(@"stopFlash...start");
+    Class captureDeviceClass = NSClassFromString(@"AVCaptureDevice");
+    if (captureDeviceClass != nil) {
+        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        if ([device hasTorch]) {
+            [device lockForConfiguration:nil];
+            [device setTorchMode:AVCaptureTorchModeOff];
+            [device unlockForConfiguration];
+            NSLog(@"stopFlash...ok");
+        }else{
+            NSLog(@"stopFlash...noTorch");
+        }
+    }
+    NSLog(@"stopFlash...end");
+}
+
 - (void)endSession {
     #if TARGET_IPHONE_SIMULATOR
     return;
